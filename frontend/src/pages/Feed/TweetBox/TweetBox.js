@@ -10,7 +10,6 @@ import { collection, getDoc, getDocs } from "firebase/firestore";
 import { addDoc } from "firebase/firestore";
 import { useEffect } from "react";
 import firebase from "firebase/compat/app";
-import { set } from "mongoose";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 function TweetBox() {
