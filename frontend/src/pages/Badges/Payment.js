@@ -16,7 +16,7 @@ console.log("e",decodedEmail);
 
     const donePayment = async () => {
         try {
-            const res = await axios.put(`http://localhost:5000/update-badge?email=${encodeURIComponent(email)}`, { email: decodedEmail },
+            const res = await axios.put(`https://twitter-backend-ybyr.onrender.com/update-badge?email=${encodeURIComponent(email)}`, { email: decodedEmail },
               {
                 headers: {
                   "Content-Type": "application/json"

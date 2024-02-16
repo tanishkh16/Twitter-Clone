@@ -22,7 +22,7 @@ function Feed() {
     
 
     useEffect(() => {
-        fetch('http://localhost:5000/post')
+        fetch('https://twitter-backend-ybyr.onrender.com/post')
             .then(res => res.json())
             .then(data => {
                 setPosts(data);

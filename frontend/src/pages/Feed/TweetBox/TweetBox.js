@@ -55,7 +55,7 @@ const navigate = useNavigate();
         let userPlan;
 
         if (user?.providerData[0]?.providerId === 'password') {
-            fetch(`http://localhost:5000/loggedInUser?email=${email}`)
+            fetch(`https://twitter-backend-ybyr.onrender.com/loggedInUser?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setName(data[0]?.name)
@@ -69,7 +69,7 @@ const navigate = useNavigate();
                 })
         }
         else {
-            fetch(`http://localhost:5000/loggedInUser?email=${email}`)
+            fetch(`https://twitter-backend-ybyr.onrender.com/loggedInUser?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setName(data[0]?.name)
@@ -102,7 +102,7 @@ const navigate = useNavigate();
             setImageURL('')
             
             if(buy === "1"){
-                fetch(`http://localhost:5000/userPost?email=${email}`)
+                fetch(`https://twitter-backend-ybyr.onrender.com/userPost?email=${email}`)
                 .then(res => res.json())
                 .then(userPosts => {
                     const today = new Date().toISOString().split('T')[0];
@@ -112,7 +112,7 @@ const navigate = useNavigate();
                         alert("Free plan allows only 1 tweet per day. Upgrade your plan to post more.");
                         navigate('/premium')
                     } else {
-                        fetch('http://localhost:5000/post', {
+                        fetch('https://twitter-backend-ybyr.onrender.com/post', {
                             method: "POST",
                             headers: {
                                 'content-type': 'application/json'
@@ -128,7 +128,7 @@ const navigate = useNavigate();
                 .catch(error => console.error(error));
             } else if (buy === "2") {
                 
-                fetch(`http://localhost:5000/userPost?email=${email}`)
+                fetch(`https://twitter-backend-ybyr.onrender.com/userPost?email=${email}`)
                 .then(res => res.json())
                 .then(userPosts => {
                     const today = new Date().toISOString().split('T')[0];
@@ -137,7 +137,7 @@ const navigate = useNavigate();
                         alert("Silver plan allows only 5 tweet per day. Upgrade your plan to post more.");
                         navigate('/premium')
                     } else {
-                        fetch('http://localhost:5000/post', {
+                        fetch('https://twitter-backend-ybyr.onrender.com/post', {
                             method: "POST",
                             headers: {
                                 'content-type': 'application/json'
@@ -152,10 +152,10 @@ const navigate = useNavigate();
                 })
                 .catch(error => console.error(error));
             }else if (buy === "3") {
-                fetch(`http://localhost:5000/userPost?email=${email}`)
+                fetch(`https://twitter-backend-ybyr.onrender.com/userPost?email=${email}`)
                 .then(res => res.json())
                 .then(userPosts => {
-                        fetch('http://localhost:5000/post', {
+                        fetch('https://twitter-backend-ybyr.onrender.com/post', {
                             method: "POST",
                             headers: {
                                 'content-type': 'application/json'

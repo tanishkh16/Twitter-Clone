@@ -41,7 +41,7 @@ const Signup = () => {
 
             }
 
-            fetch('http://localhost:5000/register', {
+            fetch('https://twitter-backend-ybyr.onrender.com/register', {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'

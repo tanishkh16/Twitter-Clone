@@ -8,7 +8,7 @@ const useLoggedInUser = () => {
 
     useEffect(() => {
         
-        fetch(`http://localhost:5000/loggedInUser?email=${email}`)
+        fetch(`https://twitter-backend-ybyr.onrender.com/loggedInUser?email=${email}`)
             .then(res => res.json())
             .then(data => {
                 setLoggedInUser(data[0]._id)

@@ -36,7 +36,7 @@ export function UserAuthContextProvider({ children }) {
                 };
                 console.log(editedInfo);
         
-                fetch(`http://localhost:5000/userUpdates/${email}`, {
+                fetch(`https://twitter-backend-ybyr.onrender.com/userUpdates/${email}`, {
                     method: "PATCH",
                     headers: {
                         "content-type": "application/json",
@@ -53,7 +53,7 @@ export function UserAuthContextProvider({ children }) {
                     const editInfo = {
                         loginAttempt: "0",
                     };
-                    return fetch(`http://localhost:5000/userUpdates/${email}`, {
+                    return fetch(`https://twitter-backend-ybyr.onrender.com/userUpdates/${email}`, {
                         method: "PATCH",
                         headers: {
                             "Content-Type": "application/json"
@@ -68,7 +68,7 @@ export function UserAuthContextProvider({ children }) {
                     const editInfo = {
                         loginAttempt: updatedLoginAttempt
                     };
-                    return fetch(`http://localhost:5000/userUpdates/${email}`, {
+                    return fetch(`https://twitter-backend-ybyr.onrender.com/userUpdates/${email}`, {
                         method: "PATCH",
                         headers: {
                             "Content-Type": "application/json"
@@ -88,7 +88,7 @@ export function UserAuthContextProvider({ children }) {
                                 loginAttempt:updatedLoginAttempt,
                                 time:updateTime
                             }
-                            return fetch(`http://localhost:5000/userUpdates/${email}`, {
+                            return fetch(`https://twitter-backend-ybyr.onrender.com/userUpdates/${email}`, {
                                 method: "PATCH",
                                 headers: {
                                     "Content-Type": "application/json"

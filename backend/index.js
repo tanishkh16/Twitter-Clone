@@ -12,11 +12,13 @@ const stripeInstance=stripe("sk_test_51OHAA3SETXDcTTgLQ0xIsrhaU2mErakLOqnYZwAiLD
 app.use(cors());
 app.use(express.json());
 app.use(express.json());
-const corsOptions = {
-    origin: 'http://localhost:3000',
-  };
-  
-  app.use(cors(corsOptions));
+app.use(cors(
+    {
+        origin:["https://twitter-clone-xi-one.vercel.app/"],
+        methods:["GET","POST","PUT","DELETE"],
+        credentials:true
+    }
+));
 
 const uri = `mongodb+srv://Tanish:Tanish@cluster0.gfaqfbu.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1  });

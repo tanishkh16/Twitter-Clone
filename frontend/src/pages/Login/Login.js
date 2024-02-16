@@ -26,7 +26,7 @@ const Login = () => {
       }
     useEffect(() => {
       fetch(
-        `http://localhost:5000/loggedInUser?email=${email}`
+        `https://twitter-backend-ybyr.onrender.com/loggedInUser?email=${email}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -71,7 +71,7 @@ const Login = () => {
             // const decodedToken=jwtDecode(idToken);
             // console.log(decodedToken);
 
-            const res=axios.post("http://localhost:5000/login",{userId:idToken},{
+            const res=axios.post("https://twitter-backend-ybyr.onrender.com/login",{userId:idToken},{
                 headers:{
                     "Content-Type":"application/json"
                 }

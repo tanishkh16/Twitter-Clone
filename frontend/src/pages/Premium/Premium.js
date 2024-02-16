@@ -13,7 +13,7 @@ export default function Premium() {
     
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/loggedInUser?email=${email}`)
+            fetch(`https://twitter-backend-ybyr.onrender.com/loggedInUser?email=${email}`)
                 .then((res) => res.json())
                 .then((data) => {
                     setAplan(data[0]?.plan);
@@ -30,7 +30,7 @@ export default function Premium() {
       const makePaymentSilver = async (e) => {
         try {
             const stripe = await loadStripe("pk_test_51OHAA3SETXDcTTgLUwK8fSYVlPr1gnzOSED8Ox0ioJqehQXE2YC2t4LFl4QKaaq7T5senm4hpDrVlFp3vMzLjRdk006KGh5J9e");
-            const res = await fetch("http://localhost:5000/create-checkout-session-silver", {
+            const res = await fetch("https://twitter-backend-ybyr.onrender.com/create-checkout-session-silver", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -54,7 +54,7 @@ export default function Premium() {
                 };
     
                 // Fetch PATCH request
-                const patchRes = await fetch(`http://localhost:5000/userUpdates/${user?.email}`, {
+                const patchRes = await fetch(`https://twitter-backend-ybyr.onrender.com/userUpdates/${user?.email}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",
@@ -81,7 +81,7 @@ export default function Premium() {
       const makePaymentGold = async () => {
         try {
             const stripe = await loadStripe("pk_test_51O4hY9SAFIUZ4HpWQqIARd8Q3473PlKvRT4hJPcpRhpRYt1zgIObxZnbSF5SIY1gj6PV8oTMIRukMOlRVZekFi3l00fu3xrjla");
-            const res = await fetch("http://localhost:5000/create-checkout-session-gold", {
+            const res = await fetch("https://twitter-backend-ybyr.onrender.com/create-checkout-session-gold", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -100,7 +100,7 @@ export default function Premium() {
                 };
     
                 // Fetch PATCH request
-                const patchRes = await fetch(`http://localhost:5000/userUpdates/${user?.email}`, {
+                const patchRes = await fetch(`https://twitter-backend-ybyr.onrender.com/userUpdates/${user?.email}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",
