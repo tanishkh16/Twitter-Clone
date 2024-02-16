@@ -1,0 +1,71 @@
+.feed {
+  flex: 0.4;
+  border-right: 1px solid var(--twitter-background);
+  width: 100vw;
+  padding: 0 180px;
+  height: 100vh;
+  /* display: flex; */
+  align-items: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .feed {
+    padding: 0 80px; /* Adjust padding for smaller screens */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .feed {
+    padding: 0 20px; /* Adjust padding for even smaller screens */
+  }
+}
+
+.feed::-webkit-scrollbar {
+  display: none;
+}
+
+.feed__header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+  border: 1px solid var(--twitter-background);
+  padding: 15px 20px;
+}
+
+.feed__header>h2 {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+@media (max-width: 768px) {
+  .feed {
+    flex: 1; /* Take up the full width on smaller screens */
+    border-right: none; /* Remove the border on smaller screens */
+  }
+
+  .feed__header {
+    padding: 10px 15px; /* Reduce padding on smaller screens */
+  }
+
+  .feed__header > h2 {
+    font-size: 18px; /* Decrease font size on smaller screens */
+  }
+}
+
+
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/* Add styles for sidebar visibility */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
