@@ -12,12 +12,15 @@ const stripeInstance=stripe("sk_test_51OHAA3SETXDcTTgLQ0xIsrhaU2mErakLOqnYZwAiLD
 app.use(cors());
 app.use(express.json());
 app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+// app.use(cors({ origin: 'http://localhost:3000' }));
+
 app.use(cors(
     {
         origin:["https://twitter-clone-xi-one.vercel.app/"],
         methods:["GET","POST","PUT","DELETE"],
         credentials:true
-    }
+    }
 ));
 
 const uri = `mongodb+srv://Tanish:Tanish@cluster0.gfaqfbu.mongodb.net/?retryWrites=true&w=majority`;
@@ -121,7 +124,7 @@ console.log('connected to database');
                     mode:"payment",
                     success_url: `https://twitter-clone-xi-one.vercel.app/success?email=${encodeURIComponent(userEmail)}`,
 
-                    cancel_url: 'https://twitter-clone-xi-one.vercel.app/badge',
+                    cancel_url: 'https://twitter-clone-xi-one.vercel.app/',
  
         })
         res.json({id:session.id});
@@ -144,8 +147,8 @@ console.log('connected to database');
                 quantity:1
                 }],
                 mode:"payment",
-                success_url: 'https://twitter-clone-xi-one.vercel.app/premium',
-                cancel_url: 'https://twitter-clone-xi-one.vercel.app/',
+                success_url: 'https://twitter-clone-xi-one.vercel.app/',
+                cancel_url: 'https://twitter-clone-xi-one.vercel.app/home/premium',
 
     })
     res.json({url:session.url});
@@ -170,8 +173,8 @@ console.log('connected to database');
                 quantity:1
                 }],
                 mode:"payment",
-                success_url: 'https://twitter-clone-xi-one.vercel.app/premium',
-                cancel_url: 'https://twitter-clone-xi-one.vercel.app/',
+                success_url: 'https://twitter-clone-xi-one.vercel.app/',
+                cancel_url: 'https://twitter-clone-xi-one.vercel.app/home/premium',
 
     })
     res.json({url:session.url});
