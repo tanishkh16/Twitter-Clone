@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Sidebar.css";
 import SidebarOptions from "./SidebarOptions";
-import TwitterIcon from "@mui/icons-material/Twitter";
+import MenuIcon from "@mui/icons-material/Menu"; // Hamburger icon
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
@@ -26,12 +26,16 @@ import { useNavigate } from "react-router-dom";
 
 
 
+
 function Sidebar({ handleLogout, user }) {
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  };
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
   const [loggedInUser] = useLoggedInUser();
   const navigate = useNavigate();
-
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
     //console.log(e.currentTarget);
@@ -41,9 +45,12 @@ function Sidebar({ handleLogout, user }) {
   };
   const result = user?.email?.split('@')[0];
   return (
-
-    <div className="sidebar">
-      <TwitterIcon className="sidebar__twitterIcon" />
+    <>
+      <div className="hamburger-icon" onClick={toggleSidebar}>
+        <MenuIcon />
+      </div>
+    <div className={`sidebar ${isSidebarVisible ? 'sidebar-visible' : ''}`}>
+      {/* Hamburger icon */}
       <CustomeLink to='/home/feed'>
         <SidebarOptions active Icon={HomeIcon} text="Home" />
       </CustomeLink>
@@ -61,6 +68,12 @@ function Sidebar({ handleLogout, user }) {
       </CustomeLink>
       <CustomeLink to='/home/lists'>
         <SidebarOptions Icon={ListAltIcon} text="Lists" />
+      </CustomeLink>
+      <CustomeLink to='/home/premium'>
+        <SidebarOptions Icon={ListAltIcon} text="Premium" />
+      </CustomeLink>
+      <CustomeLink to='/home/badge'>
+        <SidebarOptions Icon={ListAltIcon} text="Verification Badge" />
       </CustomeLink>
       <CustomeLink to='/home/profile'>
         <SidebarOptions Icon={PermIdentityIcon} text="Profile" />
@@ -103,6 +116,7 @@ function Sidebar({ handleLogout, user }) {
         </Menu>
       </div>
     </div>
+    </>
   );
 }
 
