@@ -78,25 +78,34 @@ export function UserAuthContextProvider({ children }) {
                     })
                     .then(() => {
                         if (updatedLoginAttempt >= 4) {
-                            alert("Too many login attempts has done. Your account has been blocked.")
-                            
-                            const updateTime=Date.now();
-                            console.log("time",updateTime);
-                            const editInfo={
-                                loginAttempt:updatedLoginAttempt,
-                                time:updateTime
-                            }
-                            // sendEmailNotification(email, {
-                            //     message: ` You have done maximum failed attempts. Your account has been blocked for 1 hour.`,
-                            //   });
-                            return fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
-                                method: "PATCH",
-                                headers: {
-                                    "Content-Type": "application/json"
-                                },
-                                body: JSON.stringify(editInfo)
-                            })
-                        } else if (updatedLoginAttempt >= 2 && updatedLoginAttempt < 4) {
+                            alert("Too many login attempts have been made. Your account has been blocked.");
+                        
+                            const updateTime = Date.now();
+                            console.log("time", updateTime);
+                            const editInfo = {
+                                loginAttempt: updatedLoginAttempt,
+                                time: updateTime
+                            };
+                        
+                            sendEmailNotification(email, {
+                                message: `You have made the maximum number of failed attempts. Your account has been blocked for 1 hour.`,
+                            }).then(() => {
+                                return fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
+                                    method: "PATCH",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify(editInfo)
+                                });
+                            }).then(response => {
+                                if (!response.ok) {
+                                    throw new Error("Failed to update user information.");
+                                }
+                                console.log("User information updated successfully.");
+                            }).catch(error => {
+                                console.error("An error occurred:", error);
+                            });
+                        }else if (updatedLoginAttempt >= 2 && updatedLoginAttempt < 4) {
                             alert(`you have made ${updatedLoginAttempt} wrong attempts`);
                             sendEmailNotification(email, {
                                 message: ` You have done ${
