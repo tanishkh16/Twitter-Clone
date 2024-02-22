@@ -119,9 +119,9 @@ console.log('connected to database');
                     quantity:1
                     }],
                     mode:"payment",
-                    success_url: `http://localhost:3000/success?email=${encodeURIComponent(userEmail)}`,
+                    success_url: `https://twitter-clone-xi-one.vercel.app/success?email=${encodeURIComponent(userEmail)}`,
 
-                    cancel_url: 'http://localhost:3000/badge',
+                    cancel_url: 'https://twitter-clone-xi-one.vercel.app/badge',
  
         })
         res.json({id:session.id});
@@ -130,6 +130,7 @@ console.log('connected to database');
 
     })
     app.post("/create-checkout-session-gold", async (req, res) => {
+       try{
         const session=await stripeInstance.checkout.sessions.create({
             payment_method_types:["card"],
             line_items:[{
@@ -147,10 +148,15 @@ console.log('connected to database');
                 cancel_url: 'http://localhost:3000/',
 
     })
-    res.json({id:session.id});
-    console.log("hello")
-      });
+    res.json({url:session.url});
+}catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
+
+    
       app.post("/create-checkout-session-silver", async (req, res) => {
+        try{
         const session=await stripeInstance.checkout.sessions.create({
             payment_method_types:["card"],
             line_items:[{
@@ -168,9 +174,12 @@ console.log('connected to database');
                 cancel_url: 'http://localhost:3000/',
 
     })
-    res.json({id:session.id});
-    console.log("hello")
-      });
+    res.json({url:session.url});
+}
+    catch (error) {
+        res.status(500).send({ error: error.message });
+      }
+    });
     app.put('/update-badge', async (req, res) => {
         try {
             const { email } = req.query; // Extract email from query parameters
