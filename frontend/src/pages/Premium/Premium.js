@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useUserAuth } from "../../context/UserAuthContext";
 import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
+import "./Premium.css";
+import { API_ENDPOINT } from '../../utils';
 
 
 export default function Premium() {
@@ -13,7 +15,7 @@ export default function Premium() {
     
     useEffect(() => {
         if (email) {
-            fetch(`https://twitter-backend-ybyr.onrender.com/loggedInUser?email=${email}`)
+            fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
                 .then((res) => res.json())
                 .then((data) => {
                     setAplan(data[0]?.plan);
@@ -30,7 +32,7 @@ export default function Premium() {
       const makePaymentSilver = async (e) => {
         try {
             const stripe = await loadStripe("pk_test_51OHAA3SETXDcTTgLUwK8fSYVlPr1gnzOSED8Ox0ioJqehQXE2YC2t4LFl4QKaaq7T5senm4hpDrVlFp3vMzLjRdk006KGh5J9e");
-            const res = await fetch("https://twitter-backend-ybyr.onrender.com/create-checkout-session-silver", {
+            const res = await fetch(`${API_ENDPOINT}/create-checkout-session-silver`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -40,10 +42,6 @@ export default function Premium() {
             });
     
             const data = await res.json();
-            const result=await stripe.redirectToCheckout({
-                sessionId:data.id
-            });
-            console.log(result);
     
             if (data.error) {
                 console.log(data.error.message);
@@ -54,7 +52,7 @@ export default function Premium() {
                 };
     
                 // Fetch PATCH request
-                const patchRes = await fetch(`https://twitter-backend-ybyr.onrender.com/userUpdates/${user?.email}`, {
+                const patchRes = await fetch(`${API_ENDPOINT}/userUpdates/${user?.email}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",
@@ -64,12 +62,13 @@ export default function Premium() {
     
                 // Ensure PATCH request is successful
                 if (patchRes.ok) {
+                    window.location=data.url;
                     console.log("User plan updated successfully.");
                 } else {
                     console.error("Failed to update user plan.");
                 }
             }
-            window.location.reload();
+            // window.location.reload();
 
         } catch (err) {
             console.error('Error:', err);
@@ -81,7 +80,7 @@ export default function Premium() {
       const makePaymentGold = async () => {
         try {
             const stripe = await loadStripe("pk_test_51O4hY9SAFIUZ4HpWQqIARd8Q3473PlKvRT4hJPcpRhpRYt1zgIObxZnbSF5SIY1gj6PV8oTMIRukMOlRVZekFi3l00fu3xrjla");
-            const res = await fetch("https://twitter-backend-ybyr.onrender.com/create-checkout-session-gold", {
+            const res = await fetch(`${API_ENDPOINT}/create-checkout-session-gold`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -100,17 +99,19 @@ export default function Premium() {
                 };
     
                 // Fetch PATCH request
-                const patchRes = await fetch(`https://twitter-backend-ybyr.onrender.com/userUpdates/${user?.email}`, {
+                const patchRes = await fetch(`${API_ENDPOINT}/userUpdates/${user?.email}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify(editedInfo),
                 });
-    
+    console.log(patchRes);
+    console.log("hh",data.url);
                 // Ensure PATCH request is successful
                 if (patchRes.ok) {
                     console.log("User plan updated successfully.");
+                    window.location=data.url
                 } else {
                     console.error("Failed to update user plan.");
                 }

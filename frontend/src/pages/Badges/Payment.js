@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useParams} from 'react-router-dom';
+import { API_ENDPOINT } from '../../utils';
 
 
 export default function Payment() {
@@ -16,7 +17,7 @@ console.log("e",decodedEmail);
 
     const donePayment = async () => {
         try {
-            const res = await axios.put(`https://twitter-backend-ybyr.onrender.com/update-badge?email=${encodeURIComponent(email)}`, { email: decodedEmail },
+            const res = await axios.put(`${API_ENDPOINT}/update-badge?email=${encodeURIComponent(email)}`, { email: decodedEmail },
               {
                 headers: {
                   "Content-Type": "application/json"

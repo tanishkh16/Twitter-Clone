@@ -6,7 +6,8 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import GoogleButton from "react-google-button";
 import "./Login.css"
 import { auth } from "../../context/firebase";
-// import { useCreateWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { API_ENDPOINT } from "../../utils";
+
 
 
 const Signup = () => {
@@ -41,7 +42,7 @@ const Signup = () => {
 
             }
 
-            fetch('https://twitter-backend-ybyr.onrender.com/register', {
+            fetch(`${API_ENDPOINT}/register`, {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'

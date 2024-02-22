@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useUserAuth } from "../context/UserAuthContext";
+import { API_ENDPOINT } from "../utils";
 
 const useLoggedInUser = () => {
     const { user } = useUserAuth();
@@ -8,7 +9,7 @@ const useLoggedInUser = () => {
 
     useEffect(() => {
         
-        fetch(`https://twitter-backend-ybyr.onrender.com/loggedInUser?email=${email}`)
+        fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
             .then(res => res.json())
             .then(data => {
                 setLoggedInUser(data[0]._id)

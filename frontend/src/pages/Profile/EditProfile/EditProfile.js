@@ -8,6 +8,7 @@ import { Avatar } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './EditProfile.css';
+import { API_ENDPOINT } from '../../../utils';
 
 
 const style = {
@@ -83,7 +84,7 @@ export default function EditProfile({ user, loggedInUser }) {
       dob,
     }
     console.log(editedInfo);
-    fetch(`https://twitter-backend-ybyr.onrender.com/userUpdates/${user?.email}`, {
+    fetch(`${API_ENDPOINT}/userUpdates/${user?.email}`, {
       method: "PATCH",
       headers: {
         'content-type': 'application/json'

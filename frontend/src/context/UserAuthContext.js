@@ -10,6 +10,7 @@ import {
 import { auth } from "./firebase";
 import { sendEmailNotification } from "./UserEmail";
 import { useNavigate } from "react-router-dom";
+import { API_ENDPOINT } from "../utils";
     
 
 
@@ -21,12 +22,12 @@ export function UserAuthContextProvider({ children }) {
     
 
     function logIn(email, password, loginAttempt, time) {
-        var nowtime = Date.now();
-        console.log("your account",nowtime-time);
+        var currenttime = Date.now();
+        console.log("your account",currenttime-time);
         console.log("lofin",loginAttempt)
     
         if (loginAttempt >= 4) {
-            if (nowtime - time < 3600000) {
+            if (currenttime - time < 3600000) {
                 console.log("HIII");
                 navigate("/login");
                 alert("Your account has been blocked for 1 hour. Please try again later.");
@@ -36,7 +37,7 @@ export function UserAuthContextProvider({ children }) {
                 };
                 console.log(editedInfo);
         
-                fetch(`https://twitter-backend-ybyr.onrender.com/userUpdates/${email}`, {
+                fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
                     method: "PATCH",
                     headers: {
                         "content-type": "application/json",
@@ -53,7 +54,7 @@ export function UserAuthContextProvider({ children }) {
                     const editInfo = {
                         loginAttempt: "0",
                     };
-                    return fetch(`https://twitter-backend-ybyr.onrender.com/userUpdates/${email}`, {
+                    return fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
                         method: "PATCH",
                         headers: {
                             "Content-Type": "application/json"
@@ -68,7 +69,7 @@ export function UserAuthContextProvider({ children }) {
                     const editInfo = {
                         loginAttempt: updatedLoginAttempt
                     };
-                    return fetch(`https://twitter-backend-ybyr.onrender.com/userUpdates/${email}`, {
+                    return fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
                         method: "PATCH",
                         headers: {
                             "Content-Type": "application/json"
@@ -77,9 +78,9 @@ export function UserAuthContextProvider({ children }) {
                     })
                     .then(() => {
                         if (updatedLoginAttempt >= 4) {
-                            // sendEmailNotification(email, {
-                            //     message: ` You have done maximum failed attempts. Your account has been blocked for 1 hour.`,
-                            //   });
+                            sendEmailNotification(email, {
+                                message: ` You have done maximum failed attempts. Your account has been blocked for 1 hour.`,
+                              });
                             alert("Too many login attempts has done. Your account has been blocked.")
         
                             const updateTime=Date.now();
@@ -88,7 +89,7 @@ export function UserAuthContextProvider({ children }) {
                                 loginAttempt:updatedLoginAttempt,
                                 time:updateTime
                             }
-                            return fetch(`https://twitter-backend-ybyr.onrender.com/userUpdates/${email}`, {
+                            return fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
                                 method: "PATCH",
                                 headers: {
                                     "Content-Type": "application/json"
@@ -97,11 +98,11 @@ export function UserAuthContextProvider({ children }) {
                             })
                         } else if (updatedLoginAttempt >= 2 && updatedLoginAttempt < 4) {
                             alert(`you have made ${updatedLoginAttempt} wrong attempts`);
-                            // sendEmailNotification(email, {
-                            //     message: ` You have done ${
-                            //       loginAttempt + 1
-                            //     } consecutive failed login attempts with an incorrect password`,
-                            //   });
+                            sendEmailNotification(email, {
+                                message: ` You have done ${
+                                  loginAttempt + 1
+                                } consecutive failed login attempts with an incorrect password`,
+                              });
         
                         }
                         throw err;

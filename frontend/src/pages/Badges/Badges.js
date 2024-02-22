@@ -5,6 +5,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 import { useUserAuth } from "../../context/UserAuthContext";
 import useLoggedInUser from '../../hooks/useLoggedInUser';
+import { API_ENDPOINT } from '../../utils';
 
 
 
@@ -34,7 +35,7 @@ console.log('email', email)
     useEffect(() => {
       const getUserInfo = async () => {
         try {
-          const res = await axios.get(`https://twitter-backend-ybyr.onrender.com/loggedInUser?email=${email}`, {
+          const res = await axios.get(`${API_ENDPOINT}/loggedInUser?email=${email}`, {
             headers: {
               "Content-Type": "application/json"
             }
@@ -71,7 +72,7 @@ console.log('email', email)
         console.log("Payment");
         const stripe=await loadStripe("pk_test_51OHAA3SETXDcTTgLUwK8fSYVlPr1gnzOSED8Ox0ioJqehQXE2YC2t4LFl4QKaaq7T5senm4hpDrVlFp3vMzLjRdk006KGh5J9e")
       try{
-        const response = await axios.post("https://twitter-backend-ybyr.onrender.com/badge", {
+        const response = await axios.post(`${API_ENDPOINT}/badge`, {
           userID: loggedInUser,
           email: email,
       }, {

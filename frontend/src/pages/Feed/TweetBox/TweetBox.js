@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import firebase from "firebase/compat/app";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { API_ENDPOINT } from "../../../utils";
 function TweetBox() {
     const [post, setPost] = useState([])
     const [imageURL, setImageURL] = useState('');
@@ -55,7 +56,7 @@ const navigate = useNavigate();
         let userPlan;
 
         if (user?.providerData[0]?.providerId === 'password') {
-            fetch(`https://twitter-backend-ybyr.onrender.com/loggedInUser?email=${email}`)
+            fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setName(data[0]?.name)
@@ -69,7 +70,7 @@ const navigate = useNavigate();
                 })
         }
         else {
-            fetch(`https://twitter-backend-ybyr.onrender.com/loggedInUser?email=${email}`)
+            fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setName(data[0]?.name)
@@ -102,7 +103,7 @@ const navigate = useNavigate();
             setImageURL('')
             
             if(buy === "1"){
-                fetch(`https://twitter-backend-ybyr.onrender.com/userPost?email=${email}`)
+                fetch(`${API_ENDPOINT}/userPost?email=${email}`)
                 .then(res => res.json())
                 .then(userPosts => {
                     const today = new Date().toISOString().split('T')[0];
@@ -112,7 +113,7 @@ const navigate = useNavigate();
                         alert("Free plan allows only 1 tweet per day. Upgrade your plan to post more.");
                         navigate('/premium')
                     } else {
-                        fetch('https://twitter-backend-ybyr.onrender.com/post', {
+                        fetch(`${API_ENDPOINT}/post` , {
                             method: "POST",
                             headers: {
                                 'content-type': 'application/json'
@@ -128,7 +129,7 @@ const navigate = useNavigate();
                 .catch(error => console.error(error));
             } else if (buy === "2") {
                 
-                fetch(`https://twitter-backend-ybyr.onrender.com/userPost?email=${email}`)
+                fetch(`${API_ENDPOINT}/userPost?email=${email}`)
                 .then(res => res.json())
                 .then(userPosts => {
                     const today = new Date().toISOString().split('T')[0];
@@ -137,7 +138,7 @@ const navigate = useNavigate();
                         alert("Silver plan allows only 5 tweet per day. Upgrade your plan to post more.");
                         navigate('/premium')
                     } else {
-                        fetch('https://twitter-backend-ybyr.onrender.com/post', {
+                        fetch(`${API_ENDPOINT}/post`, {
                             method: "POST",
                             headers: {
                                 'content-type': 'application/json'
@@ -152,10 +153,10 @@ const navigate = useNavigate();
                 })
                 .catch(error => console.error(error));
             }else if (buy === "3") {
-                fetch(`https://twitter-backend-ybyr.onrender.com/userPost?email=${email}`)
+                fetch(`${API_ENDPOINT}/userPost?email=${email}`)
                 .then(res => res.json())
                 .then(userPosts => {
-                        fetch('https://twitter-backend-ybyr.onrender.com/post', {
+                        fetch(`${API_ENDPOINT}/post`, {
                             method: "POST",
                             headers: {
                                 'content-type': 'application/json'

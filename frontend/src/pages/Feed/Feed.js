@@ -12,6 +12,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PublishIcon from "@mui/icons-material/Publish";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import axios from "axios";
+import { API_ENDPOINT } from "../../utils";
 
 
 
@@ -22,7 +23,7 @@ function Feed() {
     
 
     useEffect(() => {
-        fetch('https://twitter-backend-ybyr.onrender.com/post')
+        fetch(`${API_ENDPOINT}/post`)
             .then(res => res.json())
             .then(data => {
                 setPosts(data);

@@ -7,6 +7,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import "./Login.css";
 import axios from "axios";
 import { useEffect } from "react";
+import { API_ENDPOINT } from "../../utils";
 
 
 const Login = () => {
@@ -26,7 +27,7 @@ const Login = () => {
       }
     useEffect(() => {
       fetch(
-        `https://twitter-backend-ybyr.onrender.com/loggedInUser?email=${email}`
+        `${API_ENDPOINT}/loggedInUser?email=${email}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -55,7 +56,7 @@ const Login = () => {
             // Clear email and password fields on error
             setEmail("");
             setPassword("");
-            console.log("hello");
+        
             window.location.reload();
             navigate("/login");
             
@@ -71,7 +72,7 @@ const Login = () => {
             // const decodedToken=jwtDecode(idToken);
             // console.log(decodedToken);
 
-            const res=axios.post("https://twitter-backend-ybyr.onrender.com/login",{userId:idToken},{
+            const res=axios.post(`${API_ENDPOINT}/login`,{userId:idToken},{
                 headers:{
                     "Content-Type":"application/json"
                 }
