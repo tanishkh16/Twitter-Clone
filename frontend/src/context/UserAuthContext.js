@@ -86,9 +86,9 @@ export function UserAuthContextProvider({ children }) {
                                 loginAttempt:updatedLoginAttempt,
                                 time:updateTime
                             }
-                            sendEmailNotification(email, {
-                                message: ` You have done maximum failed attempts. Your account has been blocked for 1 hour.`,
-                              });
+                            // sendEmailNotification(email, {
+                            //     message: ` You have done maximum failed attempts. Your account has been blocked for 1 hour.`,
+                            //   });
                             return fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
                                 method: "PATCH",
                                 headers: {
