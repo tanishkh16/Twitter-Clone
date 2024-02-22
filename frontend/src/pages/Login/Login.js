@@ -21,6 +21,7 @@ const Login = () => {
     const navigate = useNavigate();
     const [time, setTime] = React.useState("");
     const { user } = useUserAuth();
+    console.log("hello",API_ENDPOINT)
 
     function isEmpty(obj) {
         return Object.keys(obj).length === 0;

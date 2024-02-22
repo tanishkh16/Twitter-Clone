@@ -11,7 +11,7 @@ import { auth } from "./firebase";
 import { sendEmailNotification } from "./UserEmail";
 import { useNavigate } from "react-router-dom";
 import { API_ENDPOINT } from "../utils";
-    
+
 
 
 const userAuthContext = createContext();
@@ -22,12 +22,12 @@ export function UserAuthContextProvider({ children }) {
     
 
     function logIn(email, password, loginAttempt, time) {
-        var currenttime = Date.now();
-        console.log("your account",currenttime-time);
+        var nowtime = Date.now();
+        console.log("your account",nowtime-time);
         console.log("lofin",loginAttempt)
     
         if (loginAttempt >= 4) {
-            if (currenttime - time < 3600000) {
+            if (nowtime - time < 3600000) {
                 console.log("HIII");
                 navigate("/login");
                 alert("Your account has been blocked for 1 hour. Please try again later.");
@@ -78,17 +78,17 @@ export function UserAuthContextProvider({ children }) {
                     })
                     .then(() => {
                         if (updatedLoginAttempt >= 4) {
-                            sendEmailNotification(email, {
-                                message: ` You have done maximum failed attempts. Your account has been blocked for 1 hour.`,
-                              });
                             alert("Too many login attempts has done. Your account has been blocked.")
-        
+                            
                             const updateTime=Date.now();
                             console.log("time",updateTime);
                             const editInfo={
                                 loginAttempt:updatedLoginAttempt,
                                 time:updateTime
                             }
+                            sendEmailNotification(email, {
+                                message: ` You have done maximum failed attempts. Your account has been blocked for 1 hour.`,
+                              });
                             return fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
                                 method: "PATCH",
                                 headers: {
