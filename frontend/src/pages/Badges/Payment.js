@@ -24,7 +24,7 @@ console.log("e",decodedEmail);
                 }
               })
             console.log(res);
-            navigate('/badge');
+            navigate('/');
         }
         catch (error) {
             console.log(error);

@@ -111,7 +111,7 @@ const navigate = useNavigate();
                     const userPostsToday = userPosts.filter(post => post.date === today);
                     if (userPostsToday.length >= 1) {
                         alert("Free plan allows only 1 tweet per day. Upgrade your plan to post more.");
-                        navigate('/premium')
+                        navigate('/home/premium')
                     } else {
                         fetch(`${API_ENDPOINT}/post` , {
                             method: "POST",
@@ -136,7 +136,7 @@ const navigate = useNavigate();
                     const userPostsToday = userPosts.filter(post => post.date === today);
                     if (userPostsToday.length >= 5) {
                         alert("Silver plan allows only 5 tweet per day. Upgrade your plan to post more.");
-                        navigate('/premium')
+                        navigate('/home/premium')
                     } else {
                         fetch(`${API_ENDPOINT}/post`, {
                             method: "POST",

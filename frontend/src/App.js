@@ -39,13 +39,13 @@ function App() {
             <Route path="lists" element={<Lists />} />
             <Route path="profile" element={<Profile />} />
             <Route path="more" element={<More />} />
+          <Route path="badge" element={<Badge/>} />
+          <Route path="premium" element={<Premium/>} />
           </Route>
             {/* <Route path='/demo' element={<Payment/>} /> */}
           <Route path="/login" element={<Login />} />
           <Route path="/:email" element={<Payment />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/badge" element={<Badge/>} />
-          <Route path="/premium" element={<Premium/>} />
         </Routes>
       </UserAuthContextProvider>
     </div>
