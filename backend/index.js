@@ -144,8 +144,8 @@ console.log('connected to database');
                 quantity:1
                 }],
                 mode:"payment",
-                success_url: 'http://localhost:3000/premium',
-                cancel_url: 'http://localhost:3000/',
+                success_url: 'https://twitter-clone-xi-one.vercel.app/premium',
+                cancel_url: 'https://twitter-clone-xi-one.vercel.app/',
 
     })
     res.json({url:session.url});
@@ -170,8 +170,8 @@ console.log('connected to database');
                 quantity:1
                 }],
                 mode:"payment",
-                success_url: 'http://localhost:3000/premium',
-                cancel_url: 'http://localhost:3000/',
+                success_url: 'https://twitter-clone-xi-one.vercel.app/premium',
+                cancel_url: 'https://twitter-clone-xi-one.vercel.app/',
 
     })
     res.json({url:session.url});
