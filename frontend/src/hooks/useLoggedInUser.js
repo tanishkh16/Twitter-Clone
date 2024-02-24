@@ -12,7 +12,7 @@ const useLoggedInUser = () => {
         fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
             .then(res => res.json())
             .then(data => {
-                setLoggedInUser(data[0]._id)
+                setLoggedInUser(data)
             })
     }, [email, loggedInUser])
 
