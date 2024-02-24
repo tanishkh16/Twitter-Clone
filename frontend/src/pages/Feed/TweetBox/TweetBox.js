@@ -53,35 +53,25 @@ const navigate = useNavigate();
 
     const handleTweet = async (e) => {
         e.preventDefault();
-    
-
-        if (user?.providerData[0]?.providerId === 'password') {
+        // if (user?.providerData[0]?.providerId === 'password') {
+        //     fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
+        //         .then(res => res.json())
+        //         .then(data => {
+        //             setName(data[0]?.name)
+        //             setUsername(data[0]?.username)
+        //             setBuy(data[0]?.plan)                 
+        //         })
+        // }
+        // else {
             fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setName(data[0]?.name)
-                    console.log("hi")
                     setUsername(data[0]?.username)
                     setBuy(data[0]?.plan)
-                                    
-                })
-        }
-        else {
-            fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
-                .then(res => res.json())
-                .then(data => {
-                    setName(data[0]?.name)
-                    console.log("hi")
-                    setUsername(data[0]?.username)
-                    setBuy(data[0]?.plan)
-                    console.log(data[0]?.plan);
-                    console.log("hhe",buy)
                 })
 
-        }
-    
-
-      
+        // }
         if (name) {
             const userPost = {
                 profilePhoto: userProfilePic,
