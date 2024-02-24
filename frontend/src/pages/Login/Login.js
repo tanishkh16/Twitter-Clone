@@ -50,12 +50,12 @@ const Login = () => {
                 window.location.reload();
             }
         } catch (err) {
-            if(err!==undefined||err!==null){
-                console.log(err);
+            if (err !== undefined && err !== null) {
                 console.log(err);
                 setError(err);
-                // window.alert(err);
-            } 
+                window.alert(err);
+            }
+            
             setEmail("");
             setPassword("");
         
