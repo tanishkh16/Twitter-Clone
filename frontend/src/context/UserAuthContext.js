@@ -168,12 +168,12 @@ export function UserAuthContextProvider({ children }) {
                         loginAttempt: updatedLoginAttempt.toString()
                     };
                     return fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
-                            method: "PATCH",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify(editInfo)
-                        })
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(editInfo)
+                    })
                         .then(() => {
                             if (updatedLoginAttempt >= 4) {
                                 alert("Too many login attempts have been made. Your account has been blocked.");
@@ -183,7 +183,7 @@ export function UserAuthContextProvider({ children }) {
                                     loginAttempt: updatedLoginAttempt.toString(),
                                     time: updatedTime
                                 };
-    
+        
                                 fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
                                     method: "PATCH",
                                     headers: {
@@ -191,11 +191,13 @@ export function UserAuthContextProvider({ children }) {
                                     },
                                     body: JSON.stringify(editInfo)
                                 });
+                                // Moved sendEmailNotification call here
                                 sendEmailNotification(email, {
                                     message: `You have made the maximum number of failed attempts. Your account has been blocked for 1 hour.`,
                                 })
                             } else if (updatedLoginAttempt >= 1 && updatedLoginAttempt < 4) {
                                 alert(`you have made ${updatedLoginAttempt} wrong attempts`);
+                                // Moved sendEmailNotification call here
                                 sendEmailNotification(email, {
                                     message: ` You have done ${
                                       loginAttempt + 1
@@ -207,6 +209,7 @@ export function UserAuthContextProvider({ children }) {
                         });
                 });
         }
+        
     }
     
     
