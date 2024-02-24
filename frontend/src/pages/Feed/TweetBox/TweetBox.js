@@ -27,6 +27,18 @@ function TweetBox() {
     const [objectId, setObjectId] = useState('');
 const navigate = useNavigate();
 
+useEffect(() => {
+    fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
+                .then(res => res.json())
+                .then(data => {
+                    setName(data[0]?.name)
+                    setUsername(data[0]?.username)
+                    setBuy(data[0]?.plan)   
+                })
+                console.log("helloe",buy,username,name)
+    
+}, [name,username,buy,email])
+
 
 
     const userProfilePic = loggedInUser[0]?.profileImage ? loggedInUser[0]?.profileImage : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"

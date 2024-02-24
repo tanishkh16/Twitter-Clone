@@ -21,7 +21,6 @@ const Login = () => {
     const navigate = useNavigate();
     const [time, setTime] = React.useState("");
     const { user } = useUserAuth();
-    console.log("hello",API_ENDPOINT)
 
     function isEmpty(obj) {
         return Object.keys(obj).length === 0;
@@ -42,19 +41,21 @@ const Login = () => {
         setError("");
         try {
             const res=await logIn(email, password, loginAttempt, time);
+            // console.log(res);
             if(!isEmpty(user)){
                 navigate("/");
             }
             else{
                 navigate("/login");
                 window.location.reload();
-
-
             }
         } catch (err) {
-            setError(err.message);
-            window.alert(err.message);
-            // Clear email and password fields on error
+            if(err!==undefined||err!==null){
+                console.log(err);
+                console.log(err);
+                setError(err);
+                // window.alert(err);
+            } 
             setEmail("");
             setPassword("");
         

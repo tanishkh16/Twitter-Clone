@@ -21,34 +21,132 @@ export function UserAuthContextProvider({ children }) {
     const navigate = useNavigate();
     
 
+    // function logIn(email, password, loginAttempt, time) {
+    //     var nowtime = Date.now();
+    //     console.log("your account", nowtime - time);
+    //     console.log("lofin", loginAttempt)
+    
+    //     loginAttempt = loginAttempt || "0"; // Initialize loginAttempt to "0" if it's null or undefined
+    
+    //     if (parseInt(loginAttempt, 10) >= 4) {
+    //         if (nowtime - time < 3600000) {
+    //             console.log("HIII");
+    //             navigate("/login");
+    //             alert("Your account has been blocked for 1 hour. Please try again later.");
+    //         } else {
+    //             const editedInfo = {
+    //                 loginAttempt: "0",
+    //             };
+    //             console.log(editedInfo);
+    
+    //             fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
+    //                 method: "PATCH",
+    //                 headers: {
+    //                     "content-type": "application/json",
+    //                 },
+    //                 body: JSON.stringify(editedInfo),
+    //             });
+    
+    //         }
+    //     } else {
+    //         console.log("I am here");
+    //         return signInWithEmailAndPassword(auth, email, password)
+    //             .then(() => {
+    //                 console.log("Authentication successful.");
+    //                 const editInfo = {
+    //                     loginAttempt: "0",
+    //                 };
+    //                 return fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
+    //                     method: "PATCH",
+    //                     headers: {
+    //                         "Content-Type": "application/json"
+    //                     },
+    //                     body: JSON.stringify(editInfo)
+    //                 });
+    //             })
+    //             .catch((err) => {
+    //                 console.log("hello", loginAttempt);
+    //                 console.error("Authentication failed:", err.message);
+    //                 let updatedLoginAttempt = parseInt(loginAttempt, 10) + 1;
+    //                 const editInfo = {
+    //                     loginAttempt: updatedLoginAttempt.toString()
+    //                 };
+    //                 return fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
+    //                         method: "PATCH",
+    //                         headers: {
+    //                             "Content-Type": "application/json"
+    //                         },
+    //                         body: JSON.stringify(editInfo)
+    //                     })
+    //                     .then(() => {
+    //                         if (updatedLoginAttempt >= 4) {
+    //                             alert("Too many login attempts have been made. Your account has been blocked.");
+    
+    
+    //                             const updatedTime = Date.now();
+    //                             console.log("time", updatedTime);
+    //                             const editInfo = {
+    //                                 loginAttempt: updatedLoginAttempt.toString(),
+    //                                 time: updatedTime.toString()
+    //                             };
+    
+    //                             fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
+    //                                 method: "PATCH",
+    //                                 headers: {
+    //                                     "Content-Type": "application/json"
+    //                                 },
+    //                                 body: JSON.stringify(editInfo)
+    //                             });
+    //                             sendEmailNotification(email, {
+    //                                 message: `You have made the maximum number of failed attempts. Your account has been blocked for 1 hour.`,
+    //                             })
+    //                         } else if (updatedLoginAttempt >= 2 && updatedLoginAttempt < 4) {
+    //                             alert(`you have made ${updatedLoginAttempt} wrong attempts`);
+    //                             sendEmailNotification(email, {
+    //                                 message: ` You have done ${
+    //                                   loginAttempt + 1
+    //                                 } consecutive failed login attempts with an incorrect password`,
+    //                             });
+    //                         }
+    //                         throw err;
+    //                     });
+    //             });
+    //     }
+    // }
+    
     function logIn(email, password, loginAttempt, time) {
         var nowtime = Date.now();
-        console.log("your account",nowtime-time);
-        console.log("lofin",loginAttempt)
+        console.log("your account", nowtime - time);
+        console.log("lofin", loginAttempt)
     
-        if (loginAttempt >= 4) {
+    
+        if (parseInt(loginAttempt, 10) >= 4) {
             if (nowtime - time < 3600000) {
-                console.log("HIII");
-                navigate("/login");
+                console.log("Your account has been blocked for 1 hour. Please try again later.");
                 alert("Your account has been blocked for 1 hour. Please try again later.");
+                navigate("/login");
             } else {
-                const editedInfo = {
-                    loginAttempt: "0",
-                };
-                console.log(editedInfo);
-        
-                fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
-                    method: "PATCH",
-                    headers: {
-                        "content-type": "application/json",
-                    },
-                    body: JSON.stringify(editedInfo),
-                });
-            
+                return Promise.resolve(signInWithEmailAndPassword(auth, email, password))
+                    .then(() => {
+                        console.log("Authentication successful.");
+                        const editInfo = {
+                            loginAttempt: "0",
+                        };
+                        return fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
+                            method: "PATCH",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(editInfo)
+                        });
+                    })
+                    .catch((err) => {
+                        console.log("Authentication failed:", err);
+                    });
             }
-        } else {
-            console.log("I am here");
-            return signInWithEmailAndPassword(auth, email, password)
+        } 
+        else {
+            return Promise.resolve(signInWithEmailAndPassword(auth, email, password))
                 .then(() => {
                     console.log("Authentication successful.");
                     const editInfo = {
@@ -67,47 +165,46 @@ export function UserAuthContextProvider({ children }) {
                     console.error("Authentication failed:", err.message);
                     let updatedLoginAttempt = parseInt(loginAttempt, 10) + 1;
                     const editInfo = {
-                        loginAttempt: updatedLoginAttempt
+                        loginAttempt: updatedLoginAttempt.toString()
                     };
                     return fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
-                        method: "PATCH",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(editInfo)
-                    })
-                    .then(() => {
-                        if (updatedLoginAttempt >= 4) {
-                            alert("Too many login attempts have been made. Your account has been blocked.");
-                        
-                           
-                            const updatedTime = Date.now();
-                            console.log("time", updatedTime);
-                            const editInfo = {
-                                loginAttempt: updatedLoginAttempt,
-                                time: updatedTime
-                            };
-
-                            fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
+                            method: "PATCH",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(editInfo)
+                        })
+                        .then(() => {
+                            if (updatedLoginAttempt >= 4) {
+                                alert("Too many login attempts have been made. Your account has been blocked.");
+                                const updatedTime = Date.now();
+                                console.log("time", updatedTime);
+                                const editInfo = {
+                                    loginAttempt: updatedLoginAttempt.toString(),
+                                    time: updatedTime
+                                };
+    
+                                fetch(`${API_ENDPOINT}/userUpdates/${email}`, {
                                     method: "PATCH",
                                     headers: {
                                         "Content-Type": "application/json"
                                     },
                                     body: JSON.stringify(editInfo)
                                 });
-                                 sendEmailNotification(email, {
-                                message: `You have made the maximum number of failed attempts. Your account has been blocked for 1 hour.`,
-                            }) 
-                        }else if (updatedLoginAttempt >= 2 && updatedLoginAttempt < 4) {
-                            alert(`you have made ${updatedLoginAttempt} wrong attempts`);
-                            sendEmailNotification(email, {
-                                message: ` You have done ${
-                                  loginAttempt + 1
-                                } consecutive failed login attempts with an incorrect password`,
-                              });
-                        }
-                        throw err;
-                    });
+                                sendEmailNotification(email, {
+                                    message: `You have made the maximum number of failed attempts. Your account has been blocked for 1 hour.`,
+                                })
+                            } else if (updatedLoginAttempt >= 1 && updatedLoginAttempt < 4) {
+                                alert(`you have made ${updatedLoginAttempt} wrong attempts`);
+                                sendEmailNotification(email, {
+                                    message: ` You have done ${
+                                      loginAttempt + 1
+                                    } consecutive failed login attempts with an incorrect password`,
+                                });
+                            }
+                            console.log("err",err);
+                            throw err;
+                        });
                 });
         }
     }

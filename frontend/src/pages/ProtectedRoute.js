@@ -6,10 +6,8 @@ import { useEffect } from "react";
 const ProtectedRoute = ({ children }) => {
     const { user } = useUserAuth();
 
-   console.log("user",user)
 
             if (!user) {
-                return <Navigate to="/login" />;
             }
         return children;
 };

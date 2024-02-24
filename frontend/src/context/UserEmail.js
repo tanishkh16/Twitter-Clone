@@ -19,7 +19,6 @@ function sendEmailNotification  (email , {message})  {
     templateParams,
     "RHS_8Uh_12ZB_A9JT"
   )
-  console.log("hellcdevfdo")
   .then((response) => {
     console.log("Email has been sent:", response);
   })
