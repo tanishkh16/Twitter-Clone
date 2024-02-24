@@ -14,7 +14,7 @@ function sendEmailNotification  (email , {message})  {
   console.log("templateParams",templateParams)
 
   emailjs.send(
-    "service_qb9zv0v",
+    "service_mmatgmh",
     "template_6v7zk6n",
     templateParams,
     "RHS_8Uh_12ZB_A9JT"
