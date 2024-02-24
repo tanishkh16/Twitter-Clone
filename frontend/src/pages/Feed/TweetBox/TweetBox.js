@@ -53,7 +53,6 @@ const navigate = useNavigate();
 
     const handleTweet = async (e) => {
         e.preventDefault();
-        let userPlan;
 
         if (user?.providerData[0]?.providerId === 'password') {
             fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
@@ -62,7 +61,6 @@ const navigate = useNavigate();
                     setName(data[0]?.name)
                     setUsername(data[0]?.username)
                     setBuy(data[0]?.plan)
-                    userPlan = userData[0]?.plan;
                 
 
                     
