@@ -123,7 +123,6 @@ console.log('connected to database');
                     }],
                     mode:"payment",
                     success_url: `https://twitter-clone-xi-one.vercel.app/success?email=${encodeURIComponent(userEmail)}`,
-
                     cancel_url: 'https://twitter-clone-xi-one.vercel.app/',
  
         })
