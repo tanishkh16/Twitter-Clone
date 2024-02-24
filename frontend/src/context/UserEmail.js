@@ -6,10 +6,10 @@ function sendEmailNotification  (email , {message})  {
     console.log("Sending email notification...");
   const templateParams = {
     from_name: "Twitter Clone",
-    to_name: "tanish",
+    to_name: "User",
     message: message,
     to_email: email,
-    from_email: "tanishkhandelwaldsa16@gmail.com",
+    from_email: "tktanishkhandelwal16@gmail.com",
   };
   console.log("templateParams",templateParams)
 
