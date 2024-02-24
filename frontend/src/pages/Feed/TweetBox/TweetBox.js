@@ -190,7 +190,7 @@ const navigate = useNavigate();
                     className="imageInput"
                     onChange={handleUploadImage}
                 />
-                <Button className="tweetBox__tweetButton" type="submit">Tweet</Button>
+                <Button className="tweetBox__tweetButton">Tweet</Button>
             </div>
         </form>
 
