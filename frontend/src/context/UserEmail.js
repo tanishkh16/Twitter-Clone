@@ -15,7 +15,7 @@ function sendEmailNotification  (email , {message})  {
 
   emailjs.send(
     "service_qb9zv0v",
-    "template_fc9tjmb",
+    "template_6v7zk6n",
     templateParams,
     "RHS_8Uh_12ZB_A9JT"
   )

@@ -191,7 +191,6 @@ export function UserAuthContextProvider({ children }) {
                                     },
                                     body: JSON.stringify(editInfo)
                                 });
-                                // Moved sendEmailNotification call here
                                 sendEmailNotification(email, {
                                     message: `You have made the maximum number of failed attempts. Your account has been blocked for 1 hour.`,
                                 })
