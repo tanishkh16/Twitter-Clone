@@ -53,30 +53,37 @@ const navigate = useNavigate();
 
     const handleTweet = async (e) => {
         e.preventDefault();
-        // if (user?.providerData[0]?.providerId === 'password') {
-        //     fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
-        //         .then(res => res.json())
-        //         .then(data => {
-        //             setName(data[0]?.name)
-        //             setUsername(data[0]?.username)
-        //             setBuy(data[0]?.plan)                 
-        //         })
-        // }
-        // else {
-        //   await fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
-                // .then(res => res.json())
-                // .then(data => {
-                //     setName(data[0]?.name)
-                //     setUsername(data[0]?.username)
-                //     setBuy(data[0]?.plan)
-                // })
-                const userDataResponse = await fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`);
-    const userData = await userDataResponse.json();
-    setName(userData[0]?.name);
-    setUsername(userData[0]?.username);
-    setBuy(userData[0]?.plan);
+        let userPlan;
 
-        // }
+        if (user?.providerData[0]?.providerId === 'password') {
+            fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
+                .then(res => res.json())
+                .then(data => {
+                    setName(data[0]?.name)
+                    setUsername(data[0]?.username)
+                    setBuy(data[0]?.plan)
+                    userPlan = userData[0]?.plan;
+                
+
+                    
+                })
+        }
+        else {
+            fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
+                .then(res => res.json())
+                .then(data => {
+                    setName(data[0]?.name)
+    
+                    setUsername(data[0]?.username)
+                    setBuy(data[0]?.plan)
+                    console.log(data[0]?.plan);
+                    console.log("hhe",buy)
+                })
+
+        }
+    
+
+      
         if (name) {
             const userPost = {
                 profilePhoto: userProfilePic,
@@ -95,9 +102,9 @@ const navigate = useNavigate();
             setImageURL('')
             
             if(buy === "1"){
-                await fetch(`${API_ENDPOINT}/userPost?email=${email}`)
+                fetch(`${API_ENDPOINT}/userPost?email=${email}`)
                 .then(res => res.json())
-                .then( async (userPosts) => {
+                .then(userPosts => {
                     const today = new Date().toISOString().split('T')[0];
                     console.log(userPosts);
                     const userPostsToday = userPosts.filter(post => post.date === today);
@@ -105,7 +112,7 @@ const navigate = useNavigate();
                         alert("Free plan allows only 1 tweet per day. Upgrade your plan to post more.");
                         navigate('/home/premium')
                     } else {
-                        await fetch(`${API_ENDPOINT}/post` , {
+                        fetch(`${API_ENDPOINT}/post` , {
                             method: "POST",
                             headers: {
                                 'content-type': 'application/json'
@@ -121,7 +128,7 @@ const navigate = useNavigate();
                 .catch(error => console.error(error));
             } else if (buy === "2") {
                 
-               await  fetch(`${API_ENDPOINT}/userPost?email=${email}`)
+                fetch(`${API_ENDPOINT}/userPost?email=${email}`)
                 .then(res => res.json())
                 .then(userPosts => {
                     const today = new Date().toISOString().split('T')[0];
@@ -145,7 +152,7 @@ const navigate = useNavigate();
                 })
                 .catch(error => console.error(error));
             }else if (buy === "3") {
-               await  fetch(`${API_ENDPOINT}/userPost?email=${email}`)
+                fetch(`${API_ENDPOINT}/userPost?email=${email}`)
                 .then(res => res.json())
                 .then(userPosts => {
                         fetch(`${API_ENDPOINT}/post`, {
@@ -190,7 +197,7 @@ const navigate = useNavigate();
                     className="imageInput"
                     onChange={handleUploadImage}
                 />
-                <Button className="tweetBox__tweetButton">Tweet</Button>
+                <Button className="tweetBox__tweetButton" type="submit">Tweet</Button>
             </div>
         </form>
 
