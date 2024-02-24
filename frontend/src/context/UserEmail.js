@@ -9,15 +9,15 @@ function sendEmailNotification  (email , {message})  {
     to_name: "User",
     message: message,
     to_email: email,
-    from_email: "tktanishkhandelwal16@gmail.com",
+    from_email: "tanishguptadsa@gmail.com",
   };
   console.log("templateParams",templateParams)
 
   emailjs.send(
-    "service_5ucb2st",
-    "template_ra39xpk",
+    "service_qb9zv0v",
+    "template_fc9tjmb",
     templateParams,
-    "qsoqW-iWrKOynfhzO"
+    "RHS_8Uh_12ZB_A9JT"
   )
   console.log("hellcdevfdo")
   .then((response) => {
