@@ -63,13 +63,18 @@ const navigate = useNavigate();
         //         })
         // }
         // else {
-          await fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
-                .then(res => res.json())
-                .then(data => {
-                    setName(data[0]?.name)
-                    setUsername(data[0]?.username)
-                    setBuy(data[0]?.plan)
-                })
+        //   await fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`)
+                // .then(res => res.json())
+                // .then(data => {
+                //     setName(data[0]?.name)
+                //     setUsername(data[0]?.username)
+                //     setBuy(data[0]?.plan)
+                // })
+                const userDataResponse = await fetch(`${API_ENDPOINT}/loggedInUser?email=${email}`);
+    const userData = await userDataResponse.json();
+    setName(userData[0]?.name);
+    setUsername(userData[0]?.username);
+    setBuy(userData[0]?.plan);
 
         // }
         if (name) {
