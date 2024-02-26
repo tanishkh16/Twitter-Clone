@@ -2,11 +2,12 @@
   border-right: 1px solid var(--twitter-background);
   flex: 0.3;
   position: inherit;
-  width: 100%; /* Take up full width */
+  min-width: 150px;
   margin-top: 20px;
-  padding-right: 120px;
+  padding-right: 20px;
   overflow-y: scroll;
   /* display: none; Hide sidebar by default */
+
 }
 
 .sidebar::-webkit-scrollbar {
@@ -77,10 +78,10 @@
   opacity: 50%;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:788px) {
  
   .sidebar {
-    display:none;
+    display: none;
   }
   .hamburger-icon {
     display: block;

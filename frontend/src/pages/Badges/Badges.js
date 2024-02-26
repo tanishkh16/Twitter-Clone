@@ -100,14 +100,18 @@ console.log('email', email)
          
     }
   return (
-    <div className="form-container">
+    <div className="badge-container">
+      
     {badgeStatus ? (
-      <h2>You are a verfied user  {name} ✅</h2>
+      <h2>Already have a Verification badge</h2>
     ) : (
       <>
-      
-        <h2>User Information</h2>
-        <form onSubmit={handleSubmit}>
+              <form className='form' onSubmit={handleSubmit}>
+        <h2>Apply for Verification Badge</h2>
+       <br/>
+       <br/>
+       <br/>
+       <div className="form-group">
           <label htmlFor="name">Name:</label>
           <input
             type="text"
@@ -117,6 +121,8 @@ console.log('email', email)
             onChange={(e) => setName(e.target.value)}
             required
           />
+          </div>
+          <div className="form-group">
   
           <label htmlFor="username">Username:</label>
           <input
@@ -127,6 +133,8 @@ console.log('email', email)
             onChange={(e) => setUsername(e.target.value)}
             required
           />
+          </div>
+          <div className="form-group">
   
           <label htmlFor="profession">Profession:</label>
           <input
@@ -137,11 +145,9 @@ console.log('email', email)
             onChange={(e) => setProfession(e.target.value)}
             required
           />
+          </div>
   
-          <p className='box'>For Verification Badge pay Rs.999</p>
-          <button type="submit" onClick={makePayment}>
-            Pay Now
-          </button>
+          <button className="apply-button" onClick={makePayment} type="submit">Pay 299 RS.</button>
         </form>
       </>
     )}

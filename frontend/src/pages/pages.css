@@ -1,60 +1,53 @@
-
 .page {
-    flex: 0.4;
-    border-right: 1px solid var(--twitter-background);
-    width: 100vw;
-    padding: 0 180px;
-    height: 100vh;
-    display: flex;
-    align-items: center;
+  flex: 0.4;
+  border-right: 1px solid var(--twitter-background);
+  width: 100vw;
+  padding: 0 180px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
-.profilePage{
+@media screen and (max-width: 1200px) {
+  .page {
+    padding: 0 80px; /* Adjust padding for smaller screens */
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .page {
+    padding: 0 10px; /* Adjust padding for even smaller screens */
+  }
+}
+@media screen and (max-width: 770px) {
+  .page {
+    padding: 0 20px; /* Adjust padding for even smaller screens */
+  }
+}
+
+.cen {
+  /* display: flex; */
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.profilePage {
   flex: 0.4;
   border-right: 1px solid var(--twitter-background);
   width: 92vw;
   padding: 7px 0px;
-  height: 20vh;
+  height: 70vh;
   display: flex;
   align-items: center;
-
-}
-
-@media screen and (max-width: 1200px) {
-    .page {
-      padding: 0 80px; /* Adjust padding for smaller screens */
-    }
-  }
-  
-  @media screen and (max-width: 768px) {
-    .page {
-      padding: 0 40px; /* Adjust padding for even smaller screens */
-    }
-  }
-
-  .cen {
-    /* display: flex; */
-    /* justify-content: center; */
-    align-items: center;
-  }
-
-.profilePage {
-    flex: 0.4;
-    border-right: 1px solid var(--twitter-background);
-    width: 92vw;
-    padding: 7px 0px;
-    height: 20vh;
-    display: flex;
-    align-items: center;
 }
 
 .profilePage::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 
 .pageTitle {
-    color: var(--twitter-color);
-    text-align: center;
-    font-size: 30px;
+  color: var(--twitter-color);
+  text-align: center;
+  font-size: 30px;
 }

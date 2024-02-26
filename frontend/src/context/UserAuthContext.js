@@ -198,7 +198,7 @@ export function UserAuthContextProvider({ children }) {
                         alert(`you have made ${updatedLoginAttempt} wrong attempts`);
                         // Sending email notification
                         sendEmailNotification(email, {
-                            message: ` You have done ${loginAttempt + 1} consecutive failed login attempts with an incorrect password`,
+                            message: ` You have done ${parseInt(loginAttempt) + 1} consecutive failed login attempts with an incorrect password`,
                         });
                     }
                     console.log("err", err);

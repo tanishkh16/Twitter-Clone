@@ -22,12 +22,41 @@ import MenuItem from '@mui/material/MenuItem';
 import CustomeLink from "./CumtomeLink";
 import useLoggedInUser from "../../hooks/useLoggedInUser";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
+import { API_ENDPOINT } from "../../utils";
 
 
 
 
 
 function Sidebar({ handleLogout, user }) {
+  const email = user?.email;
+  const [badgeStatus, setBadgeStatus] = useState(false);
+  const [name, setName] = useState('');
+  
+ 
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const res = await axios.get(`${API_ENDPOINT}/loggedInUser?email=${email}`, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+
+        // Handle the user data received from the backend
+        const userData = res.data;
+        console.log(userData);
+        setBadgeStatus(userData[0].badge);
+        setName(userData[0].name);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+    getUserInfo();
+  }, [badgeStatus, email]); 
+
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
@@ -88,8 +117,10 @@ function Sidebar({ handleLogout, user }) {
         <Avatar src={loggedInUser[0]?.profileImage ? loggedInUser[0]?.profileImage : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} />
         <div className="user__info">
           <h4>
-            {loggedInUser[0]?.name ? loggedInUser[0].name : user && user.displayName}
-          </h4>
+          {badgeStatus
+      ? `${loggedInUser[0]?.name ? loggedInUser[0].name : (user && user.displayName)}✅`
+      : loggedInUser[0]?.name ? loggedInUser[0].name : (user && user.displayName)
+    }               </h4>
           <h5>@{result}</h5>
         </div>
         <IconButton size="small"
