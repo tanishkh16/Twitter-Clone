@@ -9,7 +9,6 @@ function Profile() {
     return (
         <div className='profilePage'>
             <MainProfile user={user}  />
-            ggh
         </div>
     )
 }
