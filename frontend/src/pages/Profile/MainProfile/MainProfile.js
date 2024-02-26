@@ -10,13 +10,17 @@ import { useNavigate } from 'react-router-dom';
 import EditProfile from '../EditProfile/EditProfile';
 import axios from "axios";
 import useLoggedInUser from '../../../hooks/useLoggedInUser';
+import { API_ENDPOINT } from '../../../utils';
 
 
 const MainProfile = ({ user }) => {
   const navigate = useNavigate();
+  const email = user?.email;
+  const [badgeStatus, setBadgeStatus] = useState(false);
   // const [imageURL, setImageURL] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [loggedInUser] = useLoggedInUser();
+  const [name, setName] = useState('');
 
   const username = user?.email?.split('@')[0];
   const [posts, setPosts] = useState([]);
@@ -27,6 +31,28 @@ const MainProfile = ({ user }) => {
         setPosts(data);
       })
   }, [user?.email]) 
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const res = await axios.get(`${API_ENDPOINT}/loggedInUser?email=${email}`, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+
+        // Handle the user data received from the backend
+        const userData = res.data;
+        console.log(userData);
+        setBadgeStatus(userData[0].badge);
+        setName(userData[0].name);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+    getUserInfo();
+  }, [badgeStatus, email]); 
+  console.log('badge', badgeStatus);
+  
 
   const handleUploadCoverImage = e => {
     setIsLoading(true);
@@ -160,12 +186,17 @@ const MainProfile = ({ user }) => {
                   </div>
                 </div>
                 <div className='userInfo'>
-                  <div>
-                    <h3 className='heading-3'>
-                      {loggedInUser[0]?.name ? loggedInUser[0].name : user && user.displayName}
-                    </h3>
-                    <p className='usernameSection'>@{username}</p>
-                  </div>
+                <div>
+  <h3 className='heading-3'>
+    {badgeStatus
+      ? `${loggedInUser[0]?.name ? loggedInUser[0].name : (user && user.displayName)}✅`
+      : loggedInUser[0]?.name ? loggedInUser[0].name : (user && user.displayName)
+    }
+  </h3>
+  <p className='usernameSection'>@{username}</p>
+</div>
+
+
                   <EditProfile user={user} loggedInUser={loggedInUser} />
                 </div>
                 <div className='infoContainer'>

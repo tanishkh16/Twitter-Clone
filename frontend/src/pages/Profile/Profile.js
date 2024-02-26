@@ -8,7 +8,8 @@ function Profile() {
     const { user } = useUserAuth();
     return (
         <div className='profilePage'>
-            <MainProfile user={user} />
+            <MainProfile user={user}  />
+            ggh
         </div>
     )
 }

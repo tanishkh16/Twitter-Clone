@@ -34,6 +34,7 @@ export function UserAuthContextProvider({ children }) {
                 navigate("/login");
                 alert("Your account has been blocked for 1 hour. Please try again later.");
             } else{
+                alert("Your account has been un blocked. Please try again.")
                 return signInWithEmailAndPassword(auth, email, password)
                 .then(() => {
                     console.log("Authentication successful.");

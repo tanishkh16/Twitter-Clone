@@ -53,7 +53,9 @@ const Login = () => {
             if (err !== undefined && err !== null) {
                 console.log(err);
                 setError(err);
-                window.alert(err);
+                if (err.message !== "Cannot convert undefined or null to object") {
+                    window.alert(err);
+                }
             }
             
             setEmail("");

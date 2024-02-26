@@ -16,7 +16,7 @@
   
   @media screen and (max-width: 768px) {
     .page {
-      padding: 0 20px; /* Adjust padding for even smaller screens */
+      padding: 0 40px; /* Adjust padding for even smaller screens */
     }
   }
 
